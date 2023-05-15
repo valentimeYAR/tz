@@ -18,6 +18,8 @@ function App() {
     const [toggle, setToggle] = useState(false)
 
     const [dropdown, setDropdown] = useState('')
+
+    const [validAllFields, setValidAllFields] = useState(false)
     const validateUsername = () => {
         if (username.length >= 4 && username.length <= 12) {
             setValidUserName(true)
@@ -32,19 +34,23 @@ function App() {
             setValidPassword(false)
         }
     }
-    const sendUser = () => {
-        const user = {
-            username: username,
-            password: password,
-            inputTextLabel: labelText,
-            rememberMe: remember,
-            checkboxSelection: toggle,
-            radioSelection: radio,
-            dropdownSelection: dropdown
-
+    const validateAllFields = () => {
+        if (validUserName && validPassword && labelText && toggle) {
+            setValidAllFields(true)
+        } else {
+            setValidAllFields(false)
         }
-        alert(JSON.stringify(user, null, 2))
     }
+    const user = {
+        username: username,
+        password: password,
+        inputTextLabel: labelText,
+        rememberMe: remember,
+        checkboxSelection: toggle,
+        radioSelection: radio,
+        dropdownSelection: dropdown
+    }
+
     return (
         <div className={s.wrapper}>
             <div className={s.container}>
@@ -60,6 +66,7 @@ function App() {
                         onChange={(e) => {
                             setUsername(e.target.value)
                             validateUsername()
+                            validateAllFields()
                         }}
                     />
                     {validUserName ? null :
@@ -76,6 +83,7 @@ function App() {
                         onChange={(e) => {
                             setPassword(e.target.value)
                             validatePassword()
+                            validateAllFields()
                         }}
                     />
                     {validPassword ? null :
@@ -88,7 +96,10 @@ function App() {
                             className={`${s.inputText} ${s.labelText}`}
                             name={'textLabel'}
                             value={labelText}
-                            onChange={(e) => setLabelText(e.target.value)}
+                            onChange={(e) => {
+                                setLabelText(e.target.value)
+                                validateAllFields()
+                            }}
                         />
                         <img src={icon} alt="" className={s.labelIcon}/>
                         <p className={s.error}>Error message informing me of a problem</p>
@@ -97,12 +108,18 @@ function App() {
                 <div className={s.radioBtns}>
                     <div className={s.remember}>
                         <input type={'checkbox'} className={s.customCheck} id={'remember'} name={'remember'}
-                               value={'yes'} onChange={() => setRemember(!remember)}/>
+                               value={'yes'} onChange={() => {
+                            setRemember(!remember)
+                            validateAllFields()
+                        }}/>
                         <label htmlFor="remember">Remember me</label>
                     </div>
                     <div className={s.toggle}>
                         <label className={`${s.toggleSwitch} ${toggle ? s.checked : null}`}>
-                            <input type={'checkbox'} checked={toggle} onChange={() => setToggle(!toggle)}/>
+                            <input type={'checkbox'} checked={toggle} onChange={() => {
+                                setToggle(!toggle)
+                                validateAllFields()
+                            }}/>
                             <span className={s.slider}></span>
                         </label>
                         <p className={s.toggleStatus}>{toggle ? "On" : "Off"}</p>
@@ -115,7 +132,10 @@ function App() {
                                 id={'radio'}
                                 name={'radio'}
                                 value={'option 1'}
-                                onChange={(e) => setRadio(e.target.value)}
+                                onChange={(e) => {
+                                    setRadio(e.target.value)
+                                    validateAllFields()
+                                }}
                             />
                             <label htmlFor="radio" className={s.radioLabel}>Radio selection 1</label>
                         </div>
@@ -126,7 +146,10 @@ function App() {
                                 id={'radio2'}
                                 name={'radio'}
                                 value={'option 2'}
-                                onChange={(e) => setRadio(e.target.value)}
+                                onChange={(e) => {
+                                    setRadio(e.target.value)
+                                    validateAllFields()
+                                }}
                             />
                             <label htmlFor="radio2" className={s.radioLabel}>Radio selection 2</label>
                         </div>
@@ -137,7 +160,10 @@ function App() {
                                 id={'radio3'}
                                 name={'radio'}
                                 value={'option 3'}
-                                onChange={(e) => setRadio(e.target.value)}
+                                onChange={(e) => {
+                                    setRadio(e.target.value)
+                                    validateAllFields()
+                                }}
                             />
                             <label htmlFor="radio3" className={s.radioLabel}>Radio selection 3</label>
                         </div>
@@ -147,6 +173,7 @@ function App() {
                     <h2 className={s.title}>Dropdown title</h2>
                     <select className={s.select} onChange={(e) => {
                         setDropdown(e.target.value)
+                        validateAllFields()
                     }}>
                         <option className={`${s.option}`} value={'Dropdown option'} selected>
                             Dropdown option 1
@@ -157,7 +184,9 @@ function App() {
                 </div>
                 <div className={s.buttons}>
                     <button className={s.clear} onClick={() => window.location.reload()}>Cancel</button>
-                    <button className={s.next} onClick={sendUser}>Next</button>
+                    <button className={s.next} onClick={() => alert(JSON.stringify(user, null, 2))}
+                            disabled={!validAllFields}>Next
+                    </button>
                 </div>
             </div>
         </div>
