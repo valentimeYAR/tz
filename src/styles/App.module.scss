@@ -1,5 +1,265 @@
-.container{
-    width: 1400px;
-    margin: 0 auto;
-    padding: 96px;
+
+.container {
+  width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  padding: 96px;
+  flex-direction: column;
+  color: #666666;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 32px;
+}
+
+label {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+
+  margin-bottom: 8px;
+}
+
+.inputText {
+  width: 564px;
+  padding: 16px;
+  background: #FFFFFF;
+  border: 1px solid #CCCCCC;
+  border-radius: 8px;
+
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.warning {
+  font-size: 12px;
+  line-height: 18px;
+  margin-top: 8px;
+  margin-bottom: 32px;
+}
+
+.remember {
+  display: flex;
+  margin-bottom: 32px;
+}
+
+.customCheck {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+
+  & + label {
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+  }
+
+  & + label::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border: 1px solid #CCCCCC;
+    border-radius: 8px;
+    margin-right: 10px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 50% 50%;
+  }
+
+  &:checked + label::before {
+    background-image: url('../img/checkbox.svg');
+  }
+}
+
+// Togle
+.toggleSwitch {
+  position: relative;
+  display: inline-block;
+  width: 55px;
+  height: 33px;
+
+  & input {
+    display: none;
+  }
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: transparent;
+  transition: .4s;
+  border-radius: 34px;
+  border: 1px solid #CCCCCC;
+
+  &:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 5px;
+    top: 7px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 32px;
+    border: 1px solid #CCCCCC;
+  }
+}
+
+input:checked + .slider {
+  background-color: rebeccapurple;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.toggle {
+  position: relative;
+  margin-bottom: 32px;
+}
+
+.toggleStatus {
+  font-size: 16px;
+  line-height: 24px;
+  position: absolute;
+  top: 4px;
+  right: 19px;
+}
+
+
+
+.radio {
+  display: flex;
+  flex-direction: column;
+  gap: 32px 0;
+  margin-bottom: 32px;
+}
+
+.customRadio {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+  & + label {
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+    position: relative;
+  }
+
+  & + label::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border: 1px solid #CCCCCC;
+    border-radius: 50%;
+    margin-right: 10px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 50% 50%;
+  }
+
+  &:checked + label::before {
+    content: "";
+    width: 24px;
+    height: 24px;
+    background-color: rebeccapurple;
+    border-radius: 32px;
+    padding: 3px;
+    border: 3px solid #CCCCCC;
+  }
+}
+.radioLabel{
+  font-size: 16px;
+  line-height: 24px;
+}
+
+// Select
+
+.title{
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+}
+.select{
+  padding: 16px;
+  background: #FFFFFF;
+  border: 2px solid #7A5CFA;
+  border-radius: 8px 8px 0 0;
+  width: 564px;
+  & option{
+    padding: 16px;
+  }
+}
+.optionBlock{
+  padding: 16px;
+}
+.option{
+  font-size: 16px;
+  line-height: 24px;
+  background: #7A5CFA;
+}
+.option:hover{
+  color: red;
+}
+.error{
+  font-size: 12px;
+  line-height: 18px;
+  color: #EB5757;
+  margin-top: 8px;
+}
+.labelText{
+  padding-right: 24px;
+  border: 2px solid #EB5757;
+  border-radius: 8px;
+
+}
+.inputContainer{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.labelIcon{
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 45px;
+  right: 16px;
+}
+.dropdown{
+  margin-bottom: 200px;
+}
+.buttons{
+  display: flex;
+}
+.clear{
+  padding: 16px;
+  background-color: transparent;
+  border: 1px solid #7A5CFA;
+  border-radius: 8px;
+  font-size: 16px;
+  line-height: 24px;
+  color: #7A5CFA;
+  margin-right: 220px;
+  cursor: pointer;
+}
+.next{
+  font-size: 16px;
+  line-height: 24px;
+  padding: 16px;
+  color: #FFFFFF;
+  width: 172px;
+  background: #7A5CFA;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
 }
