@@ -1,6 +1,7 @@
 import s from './styles/App.module.scss'
 import {useState} from "react";
 import icon from "./img/icon.svg"
+import dropDownImg from './img/dropDownFalse.svg'
 
 function App() {
     const [username, setUsername] = useState('')
@@ -17,9 +18,11 @@ function App() {
 
     const [toggle, setToggle] = useState(false)
 
-    const [dropdown, setDropdown] = useState('')
+    const [dropdown, setDropdown] = useState('Dropdown option 1')
 
     const [validAllFields, setValidAllFields] = useState(false)
+
+    const [dropdownOptions, setDropdownOptions] = useState(false)
     const validateUsername = () => {
         if (username.length >= 4 && username.length <= 12) {
             setValidUserName(true)
@@ -174,13 +177,14 @@ function App() {
                     <select className={s.select} onChange={(e) => {
                         setDropdown(e.target.value)
                         validateAllFields()
-                    }}>
+                    }} onClick={() => setDropdownOptions(!dropdownOptions)}>
                         <option className={`${s.option}`} value={'Dropdown option'} selected>
                             Dropdown option 1
                         </option>
                         <option className={s.option} value={'Dropdown option2'}>Dropdown option 2</option>
                         <option className={s.option} value={'Dropdown option3'}>Dropdown option 3</option>
                     </select>
+                    <img src={dropDownImg} alt="dropdown" className={s.dropdownIcon} style={dropdownOptions ? { transform: 'scaleY(-1)' } : null}/>
                 </div>
                 <div className={s.buttons}>
                     <button className={s.clear} onClick={() => window.location.reload()}>Cancel</button>
