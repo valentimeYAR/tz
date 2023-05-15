@@ -23,6 +23,7 @@ function App() {
     const [validAllFields, setValidAllFields] = useState(false)
 
     const [dropdownOptions, setDropdownOptions] = useState(false)
+
     const validateUsername = () => {
         if (username.length >= 4 && username.length <= 12) {
             setValidUserName(true)
@@ -184,7 +185,12 @@ function App() {
                         <option className={s.option} value={'Dropdown option2'}>Dropdown option 2</option>
                         <option className={s.option} value={'Dropdown option3'}>Dropdown option 3</option>
                     </select>
-                    <img src={dropDownImg} alt="dropdown" className={s.dropdownIcon} style={dropdownOptions ? { transform: 'scaleY(-1)' } : null}/>
+                    <img
+                        src={dropDownImg}
+                        alt="dropdown"
+                        className={s.dropdownIcon}
+                        style={dropdownOptions ? {transform: 'scaleY(-1)'} : null}
+                    />
                 </div>
                 <div className={s.buttons}>
                     <button className={s.clear} onClick={() => window.location.reload()}>Cancel</button>
